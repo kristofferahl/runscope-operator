@@ -1,0 +1,7 @@
+apiVersion: monitoring.runscope.com/v1alpha1
+kind: RunscopeAgent
+metadata:
+  name: example-runscopeagent
+spec:
+  # Add fields here
+  size: 3
