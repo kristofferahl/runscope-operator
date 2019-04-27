@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runscope-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: runscope-operator
+  template:
+    metadata:
+      labels:
+        name: runscope-operator
+    spec:
+      serviceAccountName: runscope-operator
+      containers:
+        - name: runscope-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          command:
+          - runscope-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "runscope-operator"
